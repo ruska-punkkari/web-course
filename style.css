@@ -1,51 +1,10 @@
-/* Lecture 3 hands-on: style Kahvila Kaarna.
-   Edit only this file. Don't touch index.html.
-   Save, then reload the page in the browser after every step. */
+body {
+  background-color: lab(90.17% -2.6 5.12);
 
-
-/* 1. Prove the stylesheet is linked.
-      body { background: pink; }
-      Page turns pink? Good, delete the line and carry on.
-      Nothing happens? Check the <link> in index.html and the file name. */
-
-
-/* 2. Typography on body:
-      a font-family (end with a generic family like sans-serif),
-      line-height: 1.5,
-      max-width: 65ch, and centre it with margin: 0 auto.
-      Add some padding so text doesn't touch the screen edge. */
-
-
-/* 3. Colours: pick three and name them in :root, for example
-      :root {
-        --text: #...;
-        --bg: #...;
-        --brand: #...;
-      }
-      Use them with var(--text) and so on.
-      Check the contrast in the DevTools colour picker: at least 4.5 : 1. */
-
-      :root {
-        --text: #...;
-        --bg: #...;
-        --brand: #...;
-      }
-/* 4. Links: a colour, a :hover style, and a clearly visible
-      :focus-visible outline. Tab through the page to test it.
-      The nav links are too small to tap right now (the browser's
-      defaults fail the 24 px target size rule). Give them some
-      padding, or put the list items side by side with space between. */
-
-
-/* 5. Turn each article into a card: padding, border,
-      border-radius, and some space between the cards.
-      Style .price and .highlight too. */
-
-
-/* 6. Change one value in DevTools, then copy it back here.
-      (Changes in DevTools disappear when you reload.) */
-
-
-/* Finished early? The Zen Garden challenge:
-   restyle the page so your neighbour wouldn't recognise it.
-   Still no touching the HTML. */
+}
+h1 {
+  color: blue;
+}
+p {
+  color: red;
+}
