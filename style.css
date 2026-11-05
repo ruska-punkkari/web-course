@@ -1,10 +1,64 @@
-body {
-  background-color: lab(90.17% -2.6 5.12);
+:root {
+  --vihrea: #1f3a2c;
+  --vihrea-tumma: #142a1f;
+  --vihrea-vaalea: #2f5440;
+  --kerma: #f6f0e1;
+  --kerma-tumma: #e9dfc6;
+  --sinappi: #d4a321;
+  --teksti: #1d241f;
+  --virhe: #a8321e;
+  --ok: #2d6a40;
+}
 
+body {
+  background-color: var(--kerma);
+  color: var(--teksti);
 }
+
 h1 {
-  color: blue;
+  color: var(--vihrea);
 }
+
 p {
-  color: red;
+  color: var(--teksti);
+}
+
+a {
+  color: var(--vihrea);
+}
+
+a:hover {
+  color: var(--sinappi);
+}
+
+input:user-invalid,
+textarea:user-invalid {
+  border: 2px solid var(--virhe);
+}
+
+input:user-valid,
+textarea:user-valid {
+  border: 2px solid var(--ok);
+}
+
+.tila .valmis {
+  display: none;
+  color: var(--ok);
+  font-weight: bold;
+}
+
+.lomake:valid .tila .kesken {
+  display: none;
+}
+
+.lomake:valid .tila .valmis {
+  display: inline;
+}
+
+.vahvistus {
+  display: none;
+}
+
+.vahvistus.nakyy {
+  display: block;
 }

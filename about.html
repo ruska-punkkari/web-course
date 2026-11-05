@@ -1,19 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Huolto</title>
-   <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilaa huolto – Autokorjaamo Hakola</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <header>
-       <h1>mitäs tääl :D</h1>
-   </header>
-   <main>
-       <p>ei täälkää misii :DDDDDDDDDDDDDDDD</p>
-   </main>
-   <footer>
-   </footer>
+    <header>
+        <h1>Autokorjaamo Hakola</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Etusivu</a></li>
+                <li><a href="about.html" aria-current="page">Tilaa huolto</a></li>
+                <li><a href="contact.html">Ota yhteyttä</a></li>
+                <li><a href="listing.html">Palvelut ja hinnat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Huoltopyyntö</h2>
+            <p>Täytä lomake, niin otamme yhteyttä ja sovimme ajan. Mitä tarkemmin kuvaat vian, sitä nopeammin osaamme varata oikeat osat ja ajan.</p>
+            <p>Tähdellä (*) merkityt kentät ovat pakollisia.</p>
+
+            <form id="lomake" class="lomake">
+                <div class="kentta">
+                    <label for="rekisteri">Rekisterinumero *</label>
+                    <input type="text" id="rekisteri" name="rekisteri" required
+                           pattern="[A-Za-zÅÄÖåäö]{1,3}-?[0-9]{1,3}"
+                           title="Rekisterinumero muodossa ABC-123. Kirjoititko ehkä puhelinnumeron?"
+                           placeholder="ABC-123" autocomplete="off">
+                </div>
+
+                <div class="kentta">
+                    <label for="vika">Vian kuvaus *</label>
+                    <textarea id="vika" name="vika" required minlength="10" rows="5"
+                              placeholder="Mitä autossa tapahtuu? Milloin vika ilmenee?"></textarea>
+                </div>
+
+                <div class="kentta">
+                    <label for="nimi">Nimi *</label>
+                    <input type="text" id="nimi" name="nimi" required autocomplete="name">
+                </div>
+
+                <div class="kentta">
+                    <label for="puhelin">Puhelinnumero *</label>
+                    <input type="tel" id="puhelin" name="puhelin" required
+                           pattern="(\+358|0)[0-9 \-]{6,14}"
+                           title="Puhelinnumero, esim. 040 123 4567 tai +358 40 123 4567"
+                           placeholder="040 123 4567" autocomplete="tel">
+                </div>
+
+                <div class="kentta">
+                    <label for="sahkoposti">Sähköposti</label>
+                    <input type="email" id="sahkoposti" name="sahkoposti" autocomplete="email">
+                </div>
+
+                <div class="kentta">
+                    <label for="paiva">Toivottu päivä *</label>
+                    <input type="date" id="paiva" name="paiva" required>
+                    <small>Arkipäivä. Lauantai sopimuksen mukaan, sunnuntaisin suljettu.</small>
+                </div>
+
+                <p class="tila">
+                    <span class="kesken">Täytä kaikki pakolliset kentät.</span>
+                    <span class="valmis">Pyyntö on valmis lähetettäväksi.</span>
+                </p>
+
+                <button type="submit">Lähetä huoltopyyntö</button>
+            </form>
+
+            <div id="vahvistus" class="vahvistus" tabindex="-1">
+                <h3>Kiitos!</h3>
+                <p>Huoltopyyntösi on vastaanotettu. Soitamme sinulle arkipäivän aikana ja vahvistamme ajan.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Autokorjaamo Hakola, Korjaamotie 12, 62200 Kauhava</p>
+        <p>Puhelin: <a href="tel:+358401234567">040 123 4567</a> | Sähköposti: <a href="mailto:info@hakola.example">info@hakola.example</a></p>
+        <p>Avoinna ma–pe 8–17, la sopimuksen mukaan</p>
+    </footer>
+
+    <script>
+        const paiva = document.getElementById('paiva');
+        const nyt = new Date();
+        const kk = String(nyt.getMonth() + 1).padStart(2, '0');
+        const pv = String(nyt.getDate()).padStart(2, '0');
+        paiva.min = `${nyt.getFullYear()}-${kk}-${pv}`;
+
+        // Sunnuntait pois: min ei osaa tätä, joten tarkistetaan itse.
+        paiva.addEventListener('input', () => {
+            const valittu = new Date(paiva.value + 'T12:00');
+            if (valittu.getDay() === 0) {
+                paiva.setCustomValidity('Olemme sunnuntaisin suljettu. Valitse toinen päivä.');
+            } else {
+                paiva.setCustomValidity('');
+            }
+        });
+
+        document.getElementById('lomake').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('lomake').hidden = true;
+            const vahvistus = document.getElementById('vahvistus');
+            vahvistus.classList.add('nakyy');
+            vahvistus.focus();
+        });
+    </script>
 </body>
 </html>
